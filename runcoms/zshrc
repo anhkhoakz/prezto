@@ -11,3 +11,80 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
 fi
 
 # Customize to your needs...
+
+# Paths
+export PATH="/opt/homebrew/opt/uutils-coreutils/libexec/uubin:$PATH"
+export PATH="$PATH:/Applications/Docker.app/Contents/Resources/bin/"
+export PNPM_HOME="/Users/anhkhoakz/Library/pnpm"
+export PATH="$PATH":"$HOME/.pub-cache/bin"
+export PATH="$PATH:/Users/anhkhoakz/.lmstudio/bin"
+export CHROME_EXECUTABLE="/Applications/Brave Browser.app/Contents/MacOS/Brave Browser"
+
+
+# fuzzy finder
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export FZF_DEFAULT_COMMAND='fd --type file --follow --hidden --exclude .git --color=always . $HOME'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_DEFAULT_OPTS="--ansi"
+
+
+# Rust
+. "$HOME/.cargo/env"
+
+# Convert doc file to pdf
+function pdpdf() {
+  input_file="$1"
+  output_file="${input_file%.*}.pdf"
+  pandoc "$input_file" -o "$output_file" --pdf-engine=xelatex
+  echo "Output file created at: $(realpath "$output_file")"
+}
+
+eval "$(starship init zsh)"
+eval "$(fnm env --use-on-cd --shell zsh)"
+eval "$(pyenv init --path)"
+eval "$(zoxide init zsh)"
+
+
+# fast node version manager
+FNM_PATH="/Users/anhkhoakz/Library/Application Support/fnm"
+if [ -d "$FNM_PATH" ]; then
+  export PATH="/Users/anhkhoakz/Library/Application Support/fnm:$PATH"
+  eval "`fnm env`"
+fi
+
+# pnpm
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+
+# global aliases
+alias cls='clear'
+alias t='trash'
+alias rm='trash'
+alias findport='lsof -i -P -n | grep '
+alias brewup='brew update && brew upgrade'
+alias pk='openssl rand -hex 32'
+alias cb='pbcopy'
+alias pnup='pnpx npm-check-updates -u'
+alias envf='dotenv-linter fix'
+
+# End of file
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
+
+count_chars() {
+  echo "Paste your text (press Ctrl+D to finish):"
+  char_count=$(cat | wc -m)
+  echo "Character count: $char_count"
+}
+
+
+## [Completion]
+## Completion scripts setup. Remove the following line to uninstall
+[[ -f /Users/anhkhoakz/.dart-cli-completion/zsh-config.zsh ]] && . /Users/anhkhoakz/.dart-cli-completion/zsh-config.zsh || true
+## [/Completion]
+

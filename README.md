@@ -34,7 +34,7 @@ version is **4.3.11**.
       - Clone the repository:
 
         ```console
-        git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-${XDG_CONFIG_HOME:-$HOME/.config}/zsh}/.zprezto"
+        git clone --recursive https://github.com/anhkhoakz/prezto.git "${ZDOTDIR:-${XDG_CONFIG_HOME:-$HOME/.config}/zsh}/.zprezto"
         ```
 
       - Configure `$XDG_CONFIG_HOME` and `$ZDOTDIR` in _`$HOME/.zshenv`_:
@@ -148,7 +148,9 @@ The [Zsh Reference Card][7] and the [zsh-lovers][8] man page are indispensable.
 This project is licensed under the MIT License.
 
 [1]: https://www.zsh.org
-[2]: https://i.imgur.com/nrGV6pg.png "sorin theme"
+[10]: runcoms#readme
+[11]: modules/git#readme
+[2]: https://i.imgur.com/nrGV6pg.png
 [3]: https://git-scm.com
 [4]: https://github.com
 [5]: https://gitimmersion.com
@@ -156,5 +158,3 @@ This project is licensed under the MIT License.
 [7]: http://www.bash2zsh.com/zsh_refcard/refcard.pdf
 [8]: https://grml.org/zsh/zsh-lovers.html
 [9]: modules#readme
-[10]: runcoms#readme
-[11]: modules/git#readme
